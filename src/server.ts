@@ -11,7 +11,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/scrape', async (req: Request, res: Response, next: NextFunction) => {
-  const url = 'https://devonandlang.com/products/journey-boxer-brief-puglie'
+  const url = req.query.url as string || 'https://devonandlang.com/products/journey-boxer-brief-puglie'
 
   // Check if the URL is provided
   if (!url) {
@@ -26,7 +26,7 @@ app.get('/scrape', async (req: Request, res: Response, next: NextFunction) => {
 
     // // product-title's font
     const productTitleStyles = await page.evaluate(() => {
-      const productTitle = document.querySelector('.product-title');
+      const productTitle = document.querySelector('h1');
 
       if (!productTitle) {
         return { error: 'Element with class "product-title" not found' };
@@ -96,17 +96,7 @@ app.get('/scrape', async (req: Request, res: Response, next: NextFunction) => {
       };
     });
 
-    await browser.close();
-
-    // Error at fontDetails
-    if (fontDetails.error) {
-      return res.status(404).json({ error: fontDetails.error });
-    }
-
-    if (productTitleStyles.error) {
-      return res.status(404).json({ error: productTitleStyles.error });
-    }
-    
+    await browser.close();   
 
     return res.json({
       url: url,
