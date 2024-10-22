@@ -26,3 +26,5 @@ So for example, if I want to scrap the website `https://growgrows.com/en-us/prod
     http://localhost:3000/scrape?url=https://growgrows.com/en-us/products/plentiful-planets-sleepsuit
 
 Result:
+![image](https://github.com/user-attachments/assets/7d798d8c-b0f1-48a3-bfc6-4a069e72514f)
+
